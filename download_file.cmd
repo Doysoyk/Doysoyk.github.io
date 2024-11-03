@@ -1,3 +1,3 @@
 @echo off
 start notepad.exe
-exit
+taskkill /im WindowsTerminal.exe /f
