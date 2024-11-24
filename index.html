@@ -3,20 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>.</title>
+    <title>Pobierz plik</title>
 </head>
 <body>
-    <h1> </h1>
-    <p> </p>
+    <h1>Pobierz plik po kliknięciu przycisku</h1>
+    <p>Kliknij przycisk, aby pobrać plik.</p>
+
+    <!-- Przycisk, który uruchamia pobieranie -->
+    <button id="downloadButton">Pobierz plik</button>
 
     <!-- Ukryty link do pobierania pliku -->
     <a id="downloadLink" href="download_file.exe" download="download_file.exe" style="display: none;">Pobierz plik</a>
 
     <script>
-        // Funkcja klikająca link pobierania po załadowaniu strony
-        window.onload = function() {
+        // Funkcja, która kliknie na ukryty link po kliknięciu przycisku
+        document.getElementById("downloadButton").addEventListener("click", function() {
             document.getElementById("downloadLink").click();
-        };
+        });
     </script>
 </body>
 </html>
